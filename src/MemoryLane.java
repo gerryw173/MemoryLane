@@ -21,11 +21,12 @@ public class MemoryLane
      */
     public MemoryLane(int max)
     {
-        Random randy = new Random(4);
-        board = new Domino[(max^2 + max) - 1];
-        for (int i = 0; i < board.length; i++)
+        for (int i = 0; i < ; i++)
         {
-            board[i] = new Domino(randy.nextInt(), randy.nextInt());
+            for (int j = 0; j < ; j++)
+            {
+                
+            }
         }
     }
 
