@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.Collections;
+import java.util.ArrayList;
 
 public class MemoryLane
 {
@@ -21,13 +23,44 @@ public class MemoryLane
      */
     public MemoryLane(int max)
     {
-        for (int i = 0; i < ; i++)
+        int length = max * max + max; // length of array
+        board = new Domino[length - 1];
+
+        for (int i = 0; i < board.length; i++)
         {
-            for (int j = 0; j < ; j++)
+            board[i] = null;
+        }
+
+        for (int i = 1; i < max + 1; i++)
+        {
+            for (int j = 1; j < max + 1; j++)
             {
-                
+                Domino kek = new Domino(i, j);
+                addObject(kek);
             }
         }
+
+        shuffle();
+    }
+
+    /**
+     * Adds the domino to the next index that is null
+     * @param domino
+     * @return true if object is add false if not
+     */
+    private boolean addObject(Domino domino)
+    {
+        for (int i = 0; i < board.length - 1; i++)
+        {
+            if(board[i] == null)
+            {
+                board[i] = domino;
+                board[i + 1] = domino;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -41,8 +74,12 @@ public class MemoryLane
     {
         for (int i = 0; i < board.length; i++)
         {
-            if(other.get)
+            if(board[i].equals(other));
+            return true;
         }
+
+        return false;
+
     }
 
     /**
@@ -53,7 +90,18 @@ public class MemoryLane
      */
     private void shuffle()
     {
+        ArrayList<Domino> kek = new ArrayList<Domino>();
+        for (int i = 0; i < board.length; i++)
+        {
+            kek.add(board[i]);
+        }
 
+        Collections.shuffle(kek);
+
+        for (int i = 0; i < board.length; i++)
+        {
+            board[i] = kek.get(i);
+        }
     }
 
     /**
@@ -65,7 +113,14 @@ public class MemoryLane
      */
     public boolean guess(int i, int k)
     {
+        if(board[i].equals(board[k]))
+        {
+            board[i].setRevealed(true);
+            board[k].setRevealed(true);
+            return true;
+        }
 
+        return false;
     }
 
     /**
@@ -83,7 +138,15 @@ public class MemoryLane
      */
     public String peek(int... indexes)
     {
+        String str = "";
+        for (int i = 0; i < indexes.length; i++)
+        {
+            int index = indexes[i];
+            str += "[" + board[index].getTop() + "]" + "\n" +
+                    "[" + board[index].getBottom() + "]" + " ";
+        }
 
+        return str;
     }
 
     /**
@@ -92,7 +155,15 @@ public class MemoryLane
      */
     public boolean gameOver()
     {
+        for (int i = 0; i < board.length; i++)
+        {
+            if(board[i].isRevealed() == false) // if any dominos reveal equals false
+            {
+                return false;
+            }
+        }
 
+        return true;
     }
 
     /**
@@ -109,6 +180,19 @@ public class MemoryLane
      */
     public String toString()
     {
-        
+        String str = "";
+
+        for (int i = 0; i < board.length; i++)
+        {
+            if(board[i].isRevealed() == true)
+            {
+                str += board[i].dominoToString() + " ";
+            }
+
+            else
+                str += "[ ]" + "\n" + "[ ]";
+        }
+
+        return str;
     }
 }

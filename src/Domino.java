@@ -23,6 +23,8 @@ public class Domino
             top = y;
             bottom = x;
         }
+
+        revealed = false;
     }
 
     /**
@@ -71,5 +73,11 @@ public class Domino
         }
 
         return false;
+    }
+
+    public String dominoToString()
+    {
+        return "[" + top + "]" + "\n" +
+                "[" + bottom + "]";
     }
 }
