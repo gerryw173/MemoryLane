@@ -163,15 +163,44 @@ public class MemoryLane
      */
     public String toString()
     {
+       int index = 0;
+       String indexes = "";
        String one = "";
        String two = "";
 
         for (int i = 0; i < board.length ; i++)
         {
-            one += "[" + board[i].getTop() + "] ";
-            two += "[" + board[i].getBottom() + "] ";
+            if(board[i].isRevealed() == true) // if the domino is revealed
+            {
+                if (index < 10)
+                {
+                    indexes += " " + index + "  ";
+                } else
+                {
+                    indexes += " " + index + " ";
+                }
+
+                one += "[" + board[i].getTop() + "] ";
+                two += "[" + board[i].getBottom() + "] ";
+                index++;
+            }
+
+            else
+            {
+                if (index < 10)
+                {
+                    indexes += " " + index + "  ";
+                } else
+                {
+                    indexes += " " + index + " ";
+                }
+
+                one += "[ ] ";
+                two += "[ ] ";
+                index++;
+            }
         }
 
-       return one + "\n" + two;
+       return indexes + " \n" + one + "\n" + two;
     }
 }
