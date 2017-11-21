@@ -1,4 +1,4 @@
-/*
+
 import java.util.Scanner;
 
 
@@ -42,5 +42,3 @@ public class MemoryLaneDriver
         System.out.println("Total time: " + elapsed + "s");
     }
 }
-
-*/

@@ -24,43 +24,23 @@ public class MemoryLane
     public MemoryLane(int max)
     {
         int length = max * max + max; // length of array
-        board = new Domino[length - 1];
+        board = new Domino[length];
 
-        for (int i = 0; i < board.length; i++)
-        {
-            board[i] = null;
-        }
+        int boardcounter = 0; // index of board array
 
         for (int i = 1; i < max + 1; i++)
         {
-            for (int j = 1; j < max + 1; j++)
+            for (int j = i; j < max + 1; j++) // j = i to make sure bottom is either equal or more than top
             {
                 Domino kek = new Domino(i, j);
-                addObject(kek);
+                board[boardcounter] = kek;
+                boardcounter++;
+                board[boardcounter] = kek;
+                boardcounter++;
             }
         }
 
         shuffle();
-    }
-
-    /**
-     * Adds the domino to the next index that is null
-     * @param domino
-     * @return true if object is add false if not
-     */
-    private boolean addObject(Domino domino)
-    {
-        for (int i = 0; i < board.length - 1; i++)
-        {
-            if(board[i] == null)
-            {
-                board[i] = domino;
-                board[i + 1] = domino;
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -74,7 +54,7 @@ public class MemoryLane
     {
         for (int i = 0; i < board.length; i++)
         {
-            if(board[i].equals(other));
+            if(board[i].equals(other) == true);
             return true;
         }
 
@@ -113,7 +93,7 @@ public class MemoryLane
      */
     public boolean guess(int i, int k)
     {
-        if(board[i].equals(board[k]))
+        if(board[i].equals(board[k]) == true)
         {
             board[i].setRevealed(true);
             board[k].setRevealed(true);
@@ -138,15 +118,18 @@ public class MemoryLane
      */
     public String peek(int... indexes)
     {
-        String str = "";
+        String one = "";
+        String two = "";
         for (int i = 0; i < indexes.length; i++)
         {
             int index = indexes[i];
-            str += "[" + board[index].getTop() + "]" + "\n" +
-                    "[" + board[index].getBottom() + "]" + " ";
+
+            one += "[" + board[index].getTop() + "] ";
+            two += "[" + board[index].getBottom() + "] ";
         }
 
-        return str;
+        return one + "\n" + two;
+
     }
 
     /**
@@ -180,19 +163,15 @@ public class MemoryLane
      */
     public String toString()
     {
-        String str = "";
+       String one = "";
+       String two = "";
 
-        for (int i = 0; i < board.length; i++)
+        for (int i = 0; i < board.length ; i++)
         {
-            if(board[i].isRevealed() == true)
-            {
-                str += board[i].dominoToString() + " ";
-            }
-
-            else
-                str += "[ ]" + "\n" + "[ ]";
+            one += "[" + board[i].getTop() + "] ";
+            two += "[" + board[i].getBottom() + "] ";
         }
 
-        return str;
+       return one + "\n" + two;
     }
 }

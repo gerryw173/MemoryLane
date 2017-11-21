@@ -12,13 +12,13 @@ public class Domino
      */
     public Domino(int x, int y)
     {
-        if(x < y)
+        if(x < y) // makes sure the lowest value is top
         {
             top = x;
             bottom = y;
         }
 
-        else
+        else // if x is more than y or if the two values are equal
         {
             top = y;
             bottom = x;
@@ -77,7 +77,9 @@ public class Domino
 
     public String dominoToString()
     {
-        return "[" + top + "]" + "\n" +
-                "[" + bottom + "]";
+        String one = "[" + top + "]"; // string that holds all the tops
+        String two = "[" + bottom + "]"; // string that holds all the bottoms
+
+        return one + "\n" + two;
     }
 }

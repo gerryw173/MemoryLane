@@ -1,8 +1,11 @@
+/*
 public class TestConstructor
+
 {
     public static void main(String[] args)
     {
-        MemoryLane kek = new MemoryLane(1);
-        System.out.println(kek);
+        MemoryLane kek = new MemoryLane(3);
+        System.out.println(kek.peek(0,2,3));
     }
 }
+*/
